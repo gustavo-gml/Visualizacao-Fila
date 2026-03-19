@@ -9,8 +9,23 @@ function adicionarElemento() {
     alert("Fila cheia!");
   }
 
+
+
+
   function mostrarFila(){
     const filaElemento = document.getElementById("lblPessoasFila");
     filaElemento.textContent = minhaFila.toString();
   }
+}
+
+function removerElemento() {
+  const itemRemovido = minhaFila.dequeue();
+
+  if (itemRemovido !== null) {
+    mostrarFila(); // Atualiza o label na tela
+    console.log(`Removido: ${itemRemovido}`);
+  } else {
+    alert("A fila já está vazia!");
+  }
+
 }
