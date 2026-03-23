@@ -12,7 +12,7 @@ class Fila {
   }
 
   isFull() {
-    return this.#fim === this.#elementos.length - 1;
+    return this.#qtd === this.#elementos.length;
   }
 
   isEmpty() {
@@ -21,7 +21,9 @@ class Fila {
 
   enqueue(elemento) {
     if (!this.isFull()) {
-      this.#fim++;
+      if (this.#elementos.length - 1 === this.#fim) this.#fim = 0
+      else this.#fim++;
+
       this.#elementos[this.#fim] = elemento;
       this.#qtd++;
       console.log(
@@ -35,26 +37,33 @@ class Fila {
   dequeue() {
     if (this.isEmpty()) return null;
 
+    const removido = this.#elementos[this.#inicio];
+
+    if(this.#inicio === this.#elementos.length - 1) this.#inicio = 0;
+    else this.#inicio++;
+    
     this.#qtd--;
 
-    return this.#elementos[this.#inicio++];
+    return removido;
   }
 
   first() {
-    if (!isEmpty) return this.#elementos[this.#inicio];
+    if (!this.isEmpty()) return this.#elementos[this.#inicio];
 
     return null;
   }
 
   last() {
-    if (!isEmpty) return this.#elementos[this.#fim];
+    if (!this.isEmpty()) return this.#elementos[this.#fim];
     return null;
   }
 
   toString() {
     let resultado = "";
-    for (let i = this.#inicio; i <= this.#fim; i++) {
-      resultado += `${this.#elementos[i]} | `;
+    for (let i = 0; i < this.#qtd; i++) {
+      // teste de toString com módulo
+      let indiceReal = (this.#inicio + i) % this.#elementos.length;
+      resultado += `${this.#elementos[indiceReal]} | `;
     }
     return resultado;
   }
