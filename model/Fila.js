@@ -29,6 +29,7 @@ class Fila {
       console.log(
         `enqueue: início=${this.#inicio}, fim=${this.#fim}, qtd=${this.#qtd}`,
       );
+
       return true;
     }
     return false;
@@ -39,9 +40,9 @@ class Fila {
 
     const removido = this.#elementos[this.#inicio];
 
-    if(this.#inicio === this.#elementos.length - 1) this.#inicio = 0;
+    if (this.#inicio === this.#elementos.length - 1) this.#inicio = 0;
     else this.#inicio++;
-    
+
     this.#qtd--;
 
     return removido;
@@ -58,7 +59,7 @@ class Fila {
     return null;
   }
 
-  toString() {
+  /*toString() {
     let resultado = "";
     for (let i = 0; i < this.#qtd; i++) {
       // teste de toString com módulo
@@ -66,5 +67,44 @@ class Fila {
       resultado += `${this.#elementos[indiceReal]} | `;
     }
     return resultado;
+  }*/
+
+  toString() {
+    let resultado = "";
+    // (1) Inicializar o índice no início da fila
+    let index = this.#inicio;
+    for (let i = 0; i < this.#qtd; i++) {
+      resultado += `${this.#elementos[index]} | `;
+      // (2) Verificar se chegou ao final do array
+      if (index === this.#elementos.length - 1) {
+        // (3) Voltar para o início
+        index = 0;
+      } else
+        // (4) Avançar o índice
+        index++;
+    }
+    return resultado;
   }
+
+  [Symbol.iterator]() {
+    let count = 0;
+    let i = this.#inicio;
+    const qtd = this.#qtd;
+    const elementos = this.#elementos;
+    const tamanho = elementos.length;
+    return {
+      next() {
+        if (count < qtd) {
+          const value = elementos[i];
+          i = (i + 1) % tamanho;
+          count++;
+          return { value, done: false };
+        } else {
+          return { done: true };
+        }
+      }
+    };
+  }
+
+
 }

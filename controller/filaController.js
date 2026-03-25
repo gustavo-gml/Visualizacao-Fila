@@ -12,8 +12,14 @@ function adicionarElemento() {
 }
 
 function mostrarFila(){
-    const filaElemento = document.getElementById("lblPessoasFila");
-    filaElemento.textContent = minhaFila.toString();
+    const filaElemento = document.getElementById("listFila");
+    filaElemento.innerHTML="";
+
+    for(let item of minhaFila){
+      const listItem = document.createElement("li");
+      listItem.textContent = item;
+      filaElemento.appendChild(listItem);
+    }
   }
 
 function removerElemento() {
