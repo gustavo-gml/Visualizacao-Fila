@@ -33,3 +33,29 @@ function removerElemento() {
   }
 
 }
+
+
+function buscarElemento(){
+  //pegar valor
+  
+  const elementoPesquisa = document.getElementById("txtnovoNome").value;
+  let cont = 0;
+  let flag = false;
+  //percorrer fila
+  for(let item of minhaFila){
+    cont++;
+     // if valor input === item da fila
+    if (elementoPesquisa === item){
+     //alert encontrado e mostra a posição
+      flag = true;
+      alert(item + " foi encontado na posição [" + cont + "] !");
+      // return para encontar só um elemento
+    }
+  }
+  if(!flag){
+    alert("Item não encontrado !");
+  }
+  
+  
+  
+}
