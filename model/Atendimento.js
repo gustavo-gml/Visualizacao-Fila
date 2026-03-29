@@ -21,9 +21,17 @@ class Atendimento{
     }
 
     toString(){
+        
+        const data = this.#horarioAtendimento.toLocaleDateString('pt-BR');
+
+        
+        const hora = this.#horarioAtendimento.toLocaleTimeString('pt-BR'); 
+
         return "Nome: " +this.#nome
         +"\nCPF: " + this.#cpf
-        +"\nHorário: " + this.#horarioAtendimento;
+        +"\nData: " + data
+        +"\nHorário: " + hora;
     }
+
 
 }

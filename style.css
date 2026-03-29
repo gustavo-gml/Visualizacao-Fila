@@ -19,5 +19,6 @@ li:hover {
 
 #listFila{ 
     white-space: pre-line;
+	padding: 8px;
 	
 }
