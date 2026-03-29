@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
     <script src="model/Fila.js"></script>
+    <script src="model/Atendimento.js"></script>
     <script src="controller/filaController.js"></script>
 
   </head>
@@ -24,6 +25,12 @@
           <br />
           <input type="text" class="form-control" id="txtnovoNome" placeholder="Digite o nome da pessoa" />
         <br />
+
+        <label for="cpf">CPF:</label>
+          <br />
+          <input type="text" class="form-control" id="txtcpf" placeholder="Digite o CPF da pessoa" oninput="mascaraCPF()"  maxlength="14" />
+        <br />
+        
         <button class="btn btn-primary" onclick="adicionarElemento()">Adicionar à fila</button>
         <button class="btn btn-success" onclick="removerElemento()">Atender</button>
         <button class="btn btn-warning" onclick="buscarElemento()">Buscar</button>

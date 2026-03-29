@@ -1,10 +1,22 @@
 const minhaFila = new Fila(5);
 
 function adicionarElemento() {
-  const novoElemento = document.getElementById("txtnovoNome");
-  if (minhaFila.enqueue(novoElemento.value)) {
+  const novoNome = document.getElementById("txtnovoNome");
+  const novoCpf = document.getElementById("txtcpf");
+  
+  if (novoNome.value === "" || novoCpf.value.length < 14) {
+        alert("Por favor, preencha o nome e o CPF corretamente!");
+        return;
+  }
+
+  const novoElemento = new Atendimento(novoNome.value, novoCpf.value, new Date())
+
+  if (minhaFila.enqueue(novoElemento)) {
     mostrarFila(); 
-    novoElemento.value = "" // mostrar a fila
+
+    novoNome.value = "" ;// mostrar a fila
+    novoCpf.value = "";
+    inputNome.focus();
   } else {
     alert("Fila cheia!");
   }
@@ -45,7 +57,7 @@ function buscarElemento(){
   for(let item of minhaFila){
     cont++;
      // if valor input === item da fila
-    if (elementoPesquisa === item){
+    if (elementoPesquisa.toLowerCase() === item.getNome().toLowerCase()){
      //alert encontrado e mostra a posição
       flag = true;
       alert(item + " foi encontado na posição [" + cont + "] !");
@@ -58,4 +70,18 @@ function buscarElemento(){
   
   
   
+}
+
+function mascaraCPF() {
+    const inputCpf = document.getElementById("txtcpf");
+    let valor = inputCpf.value.replace(/\D/g, ""); // Remove o que não é número
+
+    if (valor.length > 11) valor = valor.slice(0, 11); // Limita a 11 números
+
+    // Aplica a formatação
+    valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+    valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+    valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+    inputCpf.value = valor; // Devolve o valor formatado para o campo
 }

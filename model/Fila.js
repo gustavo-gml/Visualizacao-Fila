@@ -74,7 +74,7 @@ class Fila {
     // (1) Inicializar o índice no início da fila
     let index = this.#inicio;
     for (let i = 0; i < this.#qtd; i++) {
-      resultado += `${this.#elementos[index]} | `;
+      resultado += `${this.#elementos[index].toString} | `;
       // (2) Verificar se chegou ao final do array
       if (index === this.#elementos.length - 1) {
         // (3) Voltar para o início
