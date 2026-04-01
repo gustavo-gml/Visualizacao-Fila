@@ -2,7 +2,8 @@
 class Atendimento{
     #nome;
     #cpf;
-    #horarioAtendimento;
+    #dataHorarioAtendimento;
+    
 
     getCpf(){
         return this.#cpf;
@@ -11,21 +12,20 @@ class Atendimento{
         return this.#nome;
     }
     getHorarioAtendimento(){
-        return this.#horarioAtendimento
+        return this.#dataHorarioAtendimento;
     }
 
-    constructor(nome, cpf, horarioAtendimento){
+    constructor(nome, cpf){
         this.#cpf = cpf;
         this.#nome = nome;
-        this.#horarioAtendimento = horarioAtendimento;
+        this.#dataHorarioAtendimento = new Date();
+
     }
 
     toString(){
         
-        const data = this.#horarioAtendimento.toLocaleDateString('pt-BR');
-
-        
-        const hora = this.#horarioAtendimento.toLocaleTimeString('pt-BR'); 
+        const data = this.#dataHorarioAtendimento.toLocaleDateString('pt-BR');
+        const hora = this.#dataHorarioAtendimento.toLocaleTimeString('pt-BR'); 
 
         return "Nome: " +this.#nome
         +"\nCPF: " + this.#cpf
