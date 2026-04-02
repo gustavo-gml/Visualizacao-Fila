@@ -5,13 +5,13 @@ class Atendimento{
     #dataHorarioAtendimento;
     
 
-    getCpf(){
+    get cpf(){
         return this.#cpf;
     }
-    getNome(){
+    get nome(){
         return this.#nome;
     }
-    getHorarioAtendimento(){
+    get dataHorarioAtendimento(){
         return this.#dataHorarioAtendimento;
     }
 

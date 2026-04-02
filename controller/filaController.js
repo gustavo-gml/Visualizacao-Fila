@@ -3,6 +3,7 @@ const minhaFila = new Fila(5);
 const inputNome = document.getElementById("txtnovoNome");
 const inputCpf = document.getElementById("txtcpf");
 const containerFila = document.getElementById("listFila");
+const mensagemAtendimento = document.getElementById("mensagem-remocao");
 
 function adicionarElemento() {
 
@@ -52,10 +53,17 @@ function removerElemento() {
 
   if (itemRemovido !== null) {
     mostrarFila(); // Atualiza o label na tela
+
+    mensagemAtendimento.innerHTML = (`Removido: \n${itemRemovido}`);
+
+    localStorage.setItem('ultimoAtendido', itemRemovido);
+
     alert(`Removido: \n${itemRemovido}`);
   } else {
     alert("A fila já está vazia!");
   }
+
+  
 
 }
 
@@ -75,7 +83,7 @@ function buscarElemento() {
   for (let item of minhaFila) {
     cont++;
     // if valor input === item da fila
-    if (inputNome.value.toLowerCase() === item.getNome().toLowerCase() || inputCpf.value === item.getCpf()) {
+    if (inputNome.value.toLowerCase() === item.nome.toLowerCase() || inputCpf.value === item.cpf) {
       //alert encontrado e mostra a posição
       flag = true;
       alert(item + "\nfoi encontado na posição [" + cont + "] !");
@@ -86,9 +94,6 @@ function buscarElemento() {
   if (!flag) {
     alert("Item não encontrado !");
   }
-
-
-
 }
 
 function mascaraCPF() {
@@ -119,7 +124,7 @@ function obterClasseCorPorTempo(horas, minutos) {
 
 // Formata os dados do item para um objeto mais fácil de usar na tela
 function prepararDadosItem(item, posicao) {
-    const horaAtendimento = item.getHorarioAtendimento().toLocaleTimeString('pt-BR');
+    const horaAtendimento = item.dataHorarioAtendimento.toLocaleTimeString('pt-BR');
     const horaAtual = new Date().toLocaleTimeString('pt-BR');
     const tempoDeFila = calcularDiferencaHoras(horaAtendimento, horaAtual);
     
