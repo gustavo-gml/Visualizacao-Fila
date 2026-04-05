@@ -54,9 +54,12 @@ function removerElemento() {
   if (itemRemovido !== null) {
     mostrarFila(); // Atualiza o label na tela
 
-    mensagemAtendimento.innerHTML = (`Removido: \n${itemRemovido}`);
+    mensagemAtendimento.innerHTML = (`Próximo a ser atendido(a): \n${itemRemovido} Tempo de espera: ${calcularDiferencaHoras(
+        itemRemovido.dataHorarioAtendimento.toLocaleTimeString('pt-BR'), 
+        new Date().toLocaleTimeString('pt-BR')
+    )}` );
 
-    localStorage.setItem('ultimoAtendido', itemRemovido);
+    localStorage.setItem('ultimoAtendido', itemRemovido.nome);
 
     alert(`Removido: \n${itemRemovido}`);
   } else {

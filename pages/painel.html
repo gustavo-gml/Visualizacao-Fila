@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <script src ="../model/Atendimento.js"></script>
+    <link href="../styles/painelStyle.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-central">
+        <div class="card-atendimento">
+            <h2 class="titulo-card">Último Atendimento</h2>
+            <p class="status-verde" id="atendimento">Aguardando...</p>
+        </div>
+    </div>
+    
+<script>
+    function atualizarUltimoAtendimento(){
+        const ultimoJson = localStorage.getItem('ultimoAtendido')
+        const atual = document.getElementById("atendimento")
+
+        if(ultimoJson !== null){
+            const ultimo = JSON.stringify(ultimoJson);
+            atual.textContent = ultimo;
+            return
+        }
+       atual.textContent = "Aguardando..."
+    }
+    atualizarUltimoAtendimento();
+
+    setInterval(atualizarUltimoAtendimento, 1000)
+</script>
+</body>
+</html>

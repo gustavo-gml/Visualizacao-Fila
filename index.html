@@ -6,7 +6,7 @@
     <title>Fila em JavaScript</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles/style.css" />
     <script src="model/Fila.js"></script>
     <script src="model/Atendimento.js"></script>
     <script src="controller/filaController.js" defer></script>
@@ -34,11 +34,12 @@
         <button class="btn btn-primary" onclick="adicionarElemento()">Adicionar à fila</button>
         <button class="btn btn-success" onclick="removerElemento()">Atender</button>
         <button class="btn btn-warning" onclick="buscarElemento()">Buscar</button>
+        <a class="btn btn-dark d-inline-flex" href="pages/painel.html" target="_blank">Painel de Atendimentos</a>
         <br />
         <br />
       </div>
       <h2 id="lblPessoasFila">Dados da Fila</h2>
-      <ul id="listFila"></ul>    
+      <ul id="listFila"></ul>  
       <footer class="footer bg-success text-light text-center mt-5 py-3">
       <div class="container text-center">
         <span class="text-light">Desenvolvido por IFSULDEMINAS - Campus Machado <i class="fas fa-heart"></i></span>
