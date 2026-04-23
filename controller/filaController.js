@@ -1,4 +1,4 @@
-const minhaFila = new Fila(5);
+const minhaFila = new FilaEncadeada();
 
 const inputNome = document.getElementById("txtnovoNome");
 const inputCpf = document.getElementById("txtcpf");
