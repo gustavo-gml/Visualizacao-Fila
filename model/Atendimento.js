@@ -3,6 +3,7 @@ class Atendimento{
     #nome;
     #cpf;
     #dataHorarioAtendimento;
+    #dataNascimento;
     
 
     get cpf(){
@@ -14,12 +15,15 @@ class Atendimento{
     get dataHorarioAtendimento(){
         return this.#dataHorarioAtendimento;
     }
+    get dataNascimento(){
+        return this.#dataNascimento;
+    }
 
-    constructor(nome, cpf){
+    constructor(nome, cpf, dataNascimento){
         this.#cpf = cpf;
         this.#nome = nome;
         this.#dataHorarioAtendimento = new Date();
-
+        this.#dataNascimento = dataNascimento
     }
 
     toString(){

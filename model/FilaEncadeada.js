@@ -1,4 +1,4 @@
-class Fila {
+class FilaEncadeada {
   #inicio;
   #fim;
   #qtd;
@@ -27,7 +27,7 @@ class Fila {
     this.#fim = novoNo;
     this.#qtd++;
 
-    console.log(`Adicionado: ${novoELemento}`)
+    console.log(`Adicionado: ${novoElemento}`)
     console.log(`Quantidade: ${this.#qtd}`)
 
     return true;

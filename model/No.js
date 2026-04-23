@@ -8,7 +8,7 @@ class No{
     }
 
     get dado(){
-        return this.#proximo;
+        return this.#dado;
     }
 
     get proximo(){
@@ -20,7 +20,7 @@ class No{
     }
 
     set proximo(novoProximo){
-        this.#dado = novoDado;
+        this.#proximo = novoProximo;
     }
 
     toString(){

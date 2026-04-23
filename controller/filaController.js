@@ -2,6 +2,7 @@ const minhaFila = new FilaEncadeada();
 
 const inputNome = document.getElementById("txtnovoNome");
 const inputCpf = document.getElementById("txtcpf");
+const inputNascimento = document.getElementById("txtidade")
 const containerFila = document.getElementById("listFila");
 const mensagemAtendimento = document.getElementById("mensagem-remocao");
 
@@ -13,13 +14,14 @@ function adicionarElemento() {
 
   }
 
-  const novoElemento = new Atendimento(inputNome.value, inputCpf.value)
+  const novoElemento = new Atendimento(inputNome.value, inputCpf.value ,inputNascimento.value)
 
   if (minhaFila.enqueue(novoElemento)) {
     mostrarFila();
 
     inputNome.value = "";// mostrar a fila
     inputCpf.value = "";
+    inputNascimento.value = "";
     inputNome.focus();
   } else {
     alert("Fila cheia!");
