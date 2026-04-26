@@ -67,3 +67,25 @@ function calcularDiferencaHoras(hora1, hora2) {
     const segundos = diferencaSegundos % 60;
     return `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
 }
+
+
+function validarEntrada(maxDataStr, minDataStr) {
+    const nomeValido = inputNome.value.trim() !== "";
+    const cpfValido = inputCpf.value.length >= 14;
+    const dataValor = inputNascimento.value;
+    
+    // Validação de data comparando strings (YYYY-MM-DD)
+    const dataValida = dataValor !== "" && dataValor <= maxDataStr && dataValor >= minDataStr;
+
+    if (!nomeValido || !cpfValido) {
+        alert("Por favor, preencha o nome e o CPF corretamente!");
+        return false;
+    }
+    if (!dataValida) {
+        alert("Data de nascimento inválida! Deve ser entre hoje e 120 anos atrás.");
+        return false;
+    }
+    return true;
+}
+
+

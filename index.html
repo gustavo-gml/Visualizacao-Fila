@@ -36,7 +36,7 @@
 
         <label for="idade">Idade:</label>
           <br />
-          <input type="date" class="form-control" id="txtidade" placeholder="Digite o CPF da pessoa" />
+          <input type="date" class="form-control" id="txtidade" placeholder="Digite o CPF da pessoa" max="" min=""/>
         <br />
         
         <button class="btn btn-primary" onclick="adicionarElemento()">Adicionar à fila</button>
@@ -46,8 +46,23 @@
         <br />
         <br />
       </div>
-      <h2 id="lblPessoasFila">Dados da Fila</h2>
-      <ul id="listFila"></ul>  
+      
+      <h2 id="lblPessoasFila" class="mt-4">Estado das Filas</h2>
+      
+      <div class="container-filas">
+          <div class="coluna">
+              <h4 class="text-primary"><i class="fas fa-user-clock"></i> Fila Prioritária</h4>
+              <ul id="listFilaPrioritaria"></ul>
+          </div>
+          
+          <div class="coluna">
+              <h4 class="text-success"><i class="fas fa-user"></i> Fila Normal</h4>
+              <ul id="listFilaNormal"></ul>
+          </div>
+      </div>
+
+
+
       <footer class="footer bg-success text-light text-center mt-5 py-3">
       <div class="container text-center">
         <span class="text-light">Desenvolvido por IFSULDEMINAS - Campus Machado <i class="fas fa-heart"></i></span>
