@@ -3,6 +3,7 @@ class Atendimento{
     #nome;
     #cpf;
     #dataHorarioAtendimento;
+    #dataNascimento;
     
 
     get cpf(){
@@ -14,22 +15,29 @@ class Atendimento{
     get dataHorarioAtendimento(){
         return this.#dataHorarioAtendimento;
     }
+    get dataNascimento(){
+        return this.#dataNascimento;
+    }
 
-    constructor(nome, cpf){
+    constructor(nome, cpf, dataNascimento){
         this.#cpf = cpf;
         this.#nome = nome;
         this.#dataHorarioAtendimento = new Date();
+        this.#dataNascimento =  dataNascimento
+    }
 
+    idade(){
+        return  new Date().getFullYear() - this.#dataNascimento.getFullYear(); 
     }
 
     toString(){
         
         const data = this.#dataHorarioAtendimento.toLocaleDateString('pt-BR');
         const hora = this.#dataHorarioAtendimento.toLocaleTimeString('pt-BR'); 
+        
+        let informacoes = `Nome: ${this.#nome}\nData: ${data}\nHorário: ${hora}\nIdade: ${this.idade()}`;
 
-        return "Nome: " +this.#nome
-        +"\nData: " + data
-        +"\nHorário: " + hora;
+        return informacoes;
     }
 
 

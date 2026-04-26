@@ -21,3 +21,31 @@ li:hover {
     white-space: pre-line;
 	
 }
+
+.container-filas {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Espaço entre as colunas */
+    margin-top: 20px;
+}
+
+.coluna {
+    flex: 1; /* Faz as duas colunas terem o mesmo tamanho */
+    min-width: 300px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    white-space: pre-line;
+}
+
+/* Mantendo seus estilos de li anteriores */
+li {
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

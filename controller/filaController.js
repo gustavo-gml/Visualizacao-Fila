@@ -1,56 +1,89 @@
-const minhaFila = new Fila(5);
-
+const filaNormal = new FilaEncadeada();
+const filaPrioritaria = new FilaEncadeada();
 const inputNome = document.getElementById("txtnovoNome");
 const inputCpf = document.getElementById("txtcpf");
-const containerFila = document.getElementById("listFila");
+const inputNascimento = document.getElementById("txtidade")
+const containerFilaNormal = document.getElementById("listFilaNormal");
+const containerFilaPrioritaria = document.getElementById("listFilaPrioritaria");
 const mensagemAtendimento = document.getElementById("mensagem-remocao");
+
+let qtdAtendimentoPrioritario = 0;
+
+// Configuração Inicial de Datas
+const hoje = new Date();
+const dataLimiteMin = new Date();
+dataLimiteMin.setFullYear(hoje.getFullYear() - 120);
+const maxDataStr = hoje.toISOString().split("T")[0];
+const minDataStr = dataLimiteMin.toISOString().split("T")[0];
+
+inputNascimento.setAttribute("max", maxDataStr);
+inputNascimento.setAttribute("min", minDataStr);
+
+
+function limparCampos() {
+    inputNome.value = "";
+    inputCpf.value = "";
+    inputNascimento.value = "";
+    inputNome.focus();
+}
+
 
 function adicionarElemento() {
 
-  if (inputNome.value === "" || inputCpf.value.length < 14) {
-    alert("Por favor, preencha o nome e o CPF corretamente!");
-    return;
-
+  if(!validarEntrada(maxDataStr, minDataStr)){
+    return
   }
 
-  const novoElemento = new Atendimento(inputNome.value, inputCpf.value)
+  const novoElemento = new Atendimento(inputNome.value, inputCpf.value , new Date(inputNascimento.value));
 
-  if (minhaFila.enqueue(novoElemento)) {
-    mostrarFila();
-
-    inputNome.value = "";// mostrar a fila
-    inputCpf.value = "";
-    inputNome.focus();
-  } else {
-    alert("Fila cheia!");
+  if(novoElemento.idade() < 60){
+    filaNormal.enqueue(novoElemento)
+  } else{
+    filaPrioritaria.enqueue(novoElemento)
   }
-
+    mostrarFila(); // mostrar a fila
+    limparCampos();
 }
 
+
 function mostrarFila() {
-    // 1. Limpa a tela
-    containerFila.innerHTML = "";
+    // 1. Limpa os dois containers
+    containerFilaNormal.innerHTML = "";
+    containerFilaPrioritaria.innerHTML = "";
+    
+    let contadorPrioritario = 1;
+    let contadorNormal = 1;
 
-    let contador = 1;
-
-    // 2. Itera sobre a fila
-    for (const item of minhaFila) {
-        // 3. Prepara os dados (Lógica)
-        const dadosDestaLinha = prepararDadosItem(item, contador);
-        
-        // 4. Cria o elemento (UI)
+    // 2. Itera sobre a fila prioritária e adiciona no container de prioridade
+    for (const item of filaPrioritaria) {
+        const dadosDestaLinha = prepararDadosItem(item, contadorPrioritario);
         const htmlItem = criarElementoHTMLItem(dadosDestaLinha);
-        
-        // 5. Adiciona na tela
-        containerFila.appendChild(htmlItem);
-        
-        contador++;
+        containerFilaPrioritaria.appendChild(htmlItem);
+        contadorPrioritario++;
+    }
+
+    // 3. Itera sobre a fila normal e adiciona no container normal
+    for (const item of filaNormal) {
+        const dadosDestaLinha = prepararDadosItem(item, contadorNormal);
+        const htmlItem = criarElementoHTMLItem(dadosDestaLinha);
+        containerFilaNormal.appendChild(htmlItem);
+        contadorNormal++;
     }
 }
 
-function removerElemento() {
-  const itemRemovido = minhaFila.dequeue();
 
+function removerElemento() {
+  let itemRemovido;
+  if((qtdAtendimentoPrioritario === 3 && !filaNormal.isEmpty()) || filaPrioritaria.isEmpty()){
+    itemRemovido = filaNormal.dequeue();
+    qtdAtendimentoPrioritario = 0
+  }
+  else{
+    itemRemovido = filaPrioritaria.dequeue();
+    qtdAtendimentoPrioritario++;
+  }
+
+  
   if (itemRemovido !== null) {
     mostrarFila(); // Atualiza o label na tela
 
@@ -72,30 +105,32 @@ function removerElemento() {
 
 
 function buscarElemento() {
+    let cont = 0;
+    let flag = false;
+    const termoBuscaNome = inputNome.value.toLowerCase();
+    const termoBuscaCpf = inputCpf.value;
 
-  let cont = 0;
-  let flag = false;
-
-  //validação para pesquisa vazia
-  if(inputNome.value === "" && inputCpf.value == ""){
-    alert("Digite dados para a realização da pesquisa.");
-    return
-  }
-
-  //foreach
-  for (let item of minhaFila) {
-    cont++;
-    // if valor input === item da fila
-    if (inputNome.value.toLowerCase() === item.nome.toLowerCase() || inputCpf.value === item.cpf) {
-      //alert encontrado e mostra a posição
-      flag = true;
-      alert(item + "\nfoi encontado na posição [" + cont + "] !");
-
-      // return para encontar só um elemento
+    if(termoBuscaNome === "" && termoBuscaCpf === ""){
+        alert("Digite dados para a realização da pesquisa.");
+        return;
     }
-  }
-  if (!flag) {
-    alert("Item não encontrado !");
-  }
+
+    // Função auxiliar para evitar repetição de código na busca
+    const procurarNaLista = (fila, nomeLista) => {
+        let p = 1;
+        for (let item of fila) {
+            if (termoBuscaNome === item.nome.toLowerCase() || termoBuscaCpf === item.cpf) {
+                alert(`${item}\nEncontrado na ${nomeLista} - Posição: [${p}]`);
+                flag = true;
+            }
+            p++;
+        }
+    };
+
+    procurarNaLista(filaPrioritaria, "Fila Prioritária");
+    procurarNaLista(filaNormal, "Fila Normal");
+
+    if (!flag) alert("Item não encontrado!");
+    limparCampos();
 }
 
